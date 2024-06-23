@@ -1,0 +1,77 @@
+﻿@model OutOfOffice.Models.Employee
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+	<input type="hidden" asp-for="ID" />
+	<div class="form-group">
+		<label asp-for="FullName">FullName:</label>
+		<input asp-for="FullName" class="form-control" required />
+		<span asp-validation-for="FullName" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Subdivision">Subdivision:</label>
+		<input asp-for="Subdivision" class="form-control" required />
+		<span asp-validation-for="Subdivision" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Position">Position:</label>
+		<input asp-for="Position" class="form-control" required />
+		<span asp-validation-for="Position" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Status">Status:</label>
+		<input asp-for="Status" class="form-control" required />
+		<span asp-validation-for="Status" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<input type="hidden" asp-for="PeoplePartnerID" id="FKid" class="form-control" />
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Balance">Balance:</label>
+		<input asp-for="Balance" class="form-control" required />
+		<span asp-validation-for="Balance" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label>Photo:</label>
+		<input type="file" name="Photo" class="form-control" />
+		<span asp-validation-for="Photo" class="text-danger"></span>
+	</div>
+
+		<div>
+		<label asp-for="Login">Login:</label>
+		<input asp-for="Login" class="form-control" required />
+		<span asp-validation-for="Login" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="Password">Password:</label>
+		<input asp-for="Password" class="form-control" required />
+		<span asp-validation-for="Password" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="Role">Role:</label>
+		<input asp-for="Role" class="form-control" required />
+		<span asp-validation-for="Role" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label for="Select">Partner:</label>
+		<select id="Select" class="form-control">
+			@foreach (var partner in ViewBag.partners)
+			{
+				<option value="@partner.ID">@partner.FullName</option>
+			}
+		</select>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Save</button>
+	<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script src="/js/SelectionChange.js"></script>

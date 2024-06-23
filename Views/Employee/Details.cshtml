@@ -1,0 +1,202 @@
+﻿@model OutOfOffice.Models.Employee
+
+<h1>Employee details</h1>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Subdivision
+			</th>
+			<th>
+				Position
+			</th>
+			<th>
+				Status
+			</th>
+			<th>
+				PeoplePartner
+			</th>
+			<th>
+				Balance
+			</th>
+			<th>
+				Photo
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				@Model.ID
+			</td>
+			<td>
+				@Model.FullName
+			</td>
+			<td>
+				@Model.Subdivision
+			</td>
+			<td>
+				@Model.Position
+			</td>
+			<td>
+				@Model.Status
+			</td>
+			@if (Model.PeoplePartner != null)
+			{
+				<td>
+					@Model.PeoplePartner.FullName / #@Model.PeoplePartnerID
+				</td>
+			}
+			else
+			{
+				<td>
+					@Model.PeoplePartnerID
+				</td>
+			}
+			<td>
+				@Model.Balance
+			</td>
+			@if (Model.Photo != null)
+			{
+				<td>
+					<img src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Photo))" class="card-img-top" alt="Employee Photo">
+				</td>
+			}
+			else
+			{
+				<td>
+					NO IMAGE
+				</td>
+			}
+			<td>
+				<a href="/employee/editform/@Model.ID">EDIT</a>
+				<a href="/employee/deleteform/@Model.ID">DELETE</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h1>Leave Requests</h1>
+@if (Model.LeaveRequests != null && Model.LeaveRequests.Count > 0)
+{
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Reason</th>
+				<th>Start</th>
+				<th>End</th>
+				<th>Status</th>
+				<th>Comment</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var request in Model.LeaveRequests)
+			{
+				<tr>
+					<td>@request.ID</td>
+					<td>@request.AbsenceReason</td>
+					<td>@request.StartDate</td>
+					<td>@request.EndDate</td>
+					<td>@request.Status</td>
+					<td>@request.Comment</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>No Leave Requests</h4>
+}
+<h1>Managed Projects</h1>
+@if (Model.ManagedProjects != null && Model.ManagedProjects.Count > 0)
+{
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Project Type</th>
+				<th>Start</th>
+				<th>End</th>
+				<th>PM</th>
+				<th>Comment</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var project in Model.ManagedProjects)
+			{
+				<tr>
+					<td>@project.ID</td>
+					<td>@project.ProjectType</td>
+					<td>@project.StartDate</td>
+					<td>@project.EndDate</td>
+					@if (project.ProjectManager != null && project.ProjectManagerID != null)
+					{
+						<td>@project.ProjectManager.FullName / #@project.ProjectManagerID</td>
+					}
+					else
+					{
+						<td>@project.ProjectManagerID</td>
+					}
+					<td>@project.Comment</td>
+					<td>@project.Status</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>No Managed Projects</h4>
+}
+
+<h1>Projects</h1>
+@if (Model.ProjectEmployees != null && Model.ProjectEmployees.Count > 0)
+{
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Project Type</th>
+				<th>Start</th>
+				<th>End</th>
+				<th>PM</th>
+				<th>Comment</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var project in Model.ProjectEmployees)
+			{
+				<tr>
+					<td>@project.Project.ProjectType</td>
+					<td>@project.Project.ProjectType</td>
+					<td>@project.Project.StartDate</td>
+					<td>@project.Project.EndDate</td>
+					@if (project.Project.ProjectManager != null)
+					{
+						<td>@project.Project.ProjectManager.FullName / #@project.Project.ProjectManagerID</td>
+					}
+					else
+					{
+						<td>@project.Project.ProjectManagerID</td>
+					}
+					<td>@project.Project.Comment</td>
+					<td>@project.Project.Status</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>No Projects</h4>
+}

@@ -1,0 +1,25 @@
+﻿@model OutOfOffice.Models.Employee
+
+<form asp-action="PMEdit" method="post" enctype="multipart/form-data">
+	<input type="hidden" asp-for="ID" name="employeeID" />
+	<input type="hidden" name="projectID" id="FKid" />
+	<div class="form-group">
+		@if (ViewBag.pmProjects != null)
+		{
+			<select id="Select" class="form-control">
+				@foreach (var project in ViewBag.pmProjects)
+				{
+					<option value="@project.ID">@project.ProjectType / #@project.ProjectManager.ID</option>
+				}
+			</select>
+		}
+		else
+		{
+			<h1>No Available Projects.</h1>
+		}
+	</div>
+	<button type="submit" class="btn btn-primary">Save</button>
+	<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script src="/js/SelectionChange.js"></script>

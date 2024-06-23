@@ -1,0 +1,67 @@
+﻿@model OutOfOffice.Models.Project
+
+<h1>Project Details</h1>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Project Type
+			</th>
+			<th>
+				Start Date
+			</th>
+			<th>
+				End Date
+			</th>
+			<th>
+				Project Manager
+			</th>
+			<th>
+				Comment
+			</th>
+			<th>
+				Status
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			<tr>
+				<td>
+					@Model.ID
+				</td>
+				<td>
+					@Model.ProjectType
+				</td>
+				<td>
+					@Model.StartDate
+				</td>
+				<td>
+					@Model.EndDate
+				</td>
+				@if (Model.ProjectManager != null)
+				{
+					<td>
+						@Model.ProjectManager.FullName / #@Model.ProjectManagerID
+					</td>
+				}
+				else
+				{
+					<td>
+						@Model.ProjectManagerID
+					</td>
+				}
+				<td>
+					@Model.Comment
+				</td>
+				<td>
+					@Model.Status
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

@@ -1,0 +1,64 @@
+﻿@model OutOfOffice.Models.LeaveReq
+
+<h1>Leave Request Details</h1>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				EmployeeID
+			</th>
+			<th>
+				Absence Reason
+			</th>
+			<th>
+				Start Date
+			</th>
+			<th>
+				End Date
+			</th>
+			<th>
+				Comment
+			</th>
+			<th>
+				Status
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				@Model.ID
+			</td>
+			@if (Model.Employee != null)
+			{
+				<td>
+					@Model.Employee.FullName / #@Model.EmployeeID
+				</td>
+			}
+			else
+			{
+				<td>
+					@Model.EmployeeID
+				</td>
+			}
+			<td>
+				@Model.AbsenceReason
+			</td>
+			<td>
+				@Model.StartDate
+			</td>
+			<td>
+				@Model.EndDate
+			</td>
+			<td>
+				@Model.Comment
+			</td>
+			<td>
+				@Model.Status
+			</td>
+		</tr>
+	</tbody>
+</table>

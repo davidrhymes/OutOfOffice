@@ -1,0 +1,100 @@
+﻿@model List<OutOfOffice.Models.Employee>
+
+<h1>Employees</h1>
+<form asp-action="Search" method="post">
+	<input type="text" class="form-control" name="searchQuery" placeholder="Employee Name" />
+	<button type="submit" class="btn btn-success">Search</button>
+</form>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Subdivision
+			</th>
+			<th>
+				Position
+			</th>
+			<th>
+				Status
+			</th>
+			<th>
+				PeoplePartner
+			</th>
+			<th>
+				Balance
+			</th>
+			<th>
+				Photo
+			</th>
+			<th>
+				Role
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var employee in Model)
+			{
+				<tr>
+					<td>
+						@employee.ID
+					</td>
+					<td>
+						@employee.FullName
+					</td>
+					<td>
+						@employee.Subdivision
+					</td>
+					<td>
+						@employee.Position
+					</td>
+					<td>
+						@employee.Status
+					</td>
+					@if (employee.PeoplePartner != null)
+					{
+						<td>
+							@employee.PeoplePartner.FullName / #@employee.PeoplePartnerID
+						</td>
+					}
+					else
+					{
+						<td>
+							@employee.PeoplePartnerID
+						</td>
+					}
+					<td>
+						@employee.Balance
+					</td>
+					@if (employee.Photo != null)
+					{
+						<td>
+							<img src="data:image/jpeg;base64,@(Convert.ToBase64String(@employee.Photo))" class="card-img-top" alt="Employee Photo">
+						</td>
+					}
+					else
+					{
+						<td>
+							NO IMAGE
+						</td>
+					}
+					<td>
+						@employee.Role / @employee.Position
+					</td>
+					<td>
+						<a href="/employee/details/@employee.ID">DETAILS</a>
+						<a href="/employee/editform/@employee.ID">EDIT</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

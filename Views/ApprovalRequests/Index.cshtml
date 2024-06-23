@@ -1,0 +1,63 @@
+﻿@model List<OutOfOffice.Models.ApprovalReq>
+
+<h1>Approval Requests</h1>
+<form asp-action="Search" method="post">
+	<input type="text" class="form-control" name="searchQuery" placeholder="Request ID" />
+	<button type="submit" class="btn btn-success">Search</button>
+</form>
+@*<a class="btn btn-success" href="/approvalreq/createform">Add new request</a>*@
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Approver
+			</th>
+			<th>
+				LeaveRequestID
+			</th>
+			<th>
+				Status
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var request in Model)
+			{
+				<tr>
+					<td>
+						@request.ID
+					</td>
+					@if (request.Approver != null)
+					{
+						<td>
+							@request.Approver.FullName / #@request.ApproverID
+						</td>
+					}
+					else
+					{
+						<td>
+							#@request.ApproverID
+						</td>
+					}
+					<td>
+						<a href="/leavereq/details/@request.LeaveRequestID">@request.LeaveRequestID</a>
+					</td>
+					<td>
+						@request.Status
+					</td>
+					<td>
+						<a href="/approvalreq/editform/@request.ID">EDIT</a>
+						<a href="/approvalreq/deleteform/@request.ID">DELETE</a>
+						<a href="/approvalreq/details/@request.ID">DETAILS</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

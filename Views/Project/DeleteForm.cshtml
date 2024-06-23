@@ -1,0 +1,11 @@
+﻿@model Project
+
+<form asp-action="Delete" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ID" />
+    <div class="form-group">
+        <label>Are you sure you wanna delete @Model.ID project?</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

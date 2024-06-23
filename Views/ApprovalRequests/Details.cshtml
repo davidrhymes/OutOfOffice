@@ -1,0 +1,62 @@
+﻿@model ApprovalReq
+
+<h1>Approval Request</h1>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Approver
+			</th>
+			<th>
+				LeaveRequestID
+			</th>
+			<th>
+				Status
+			</th>
+			<th>
+				Comment
+			</th>
+			<th>
+
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			<tr>
+				<td>
+					@Model.ID
+				</td>
+				@if (Model.Approver != null)
+				{
+					<td>
+						@Model.Approver.FullName / #@Model.ApproverID
+					</td>
+				}
+				else
+				{
+					<td>
+						@Model.ApproverID
+					</td>
+				}
+				<td>
+					<a href="/leavereq/details/@Model.LeaveRequestID">@Model.LeaveRequestID</a>
+				</td>
+				<td>
+					@Model.Status
+				</td>
+				<td>
+					@Model.Comment
+				</td>
+				<td>
+					<a href="/approvalreq/editform/@Model.ID">EDIT</a>
+					<a href="/approvalreq/deleteform/@Model.ID">DELETE</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

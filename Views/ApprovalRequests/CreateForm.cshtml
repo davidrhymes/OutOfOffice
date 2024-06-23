@@ -1,0 +1,30 @@
+﻿@model ApprovalReq
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="ApproverID">ApproverID:</label>
+        <input asp-for="ApproverID" class="form-control" />
+        <span asp-validation-for="ApproverID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LeaveRequestID">LeaveRequestID:</label>
+        <input asp-for="LeaveRequestID" class="form-control" />
+        <span asp-validation-for="LeaveRequestID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status">Status:</label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Comment">Comment:</label>
+        <input asp-for="Comment" class="form-control" />
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

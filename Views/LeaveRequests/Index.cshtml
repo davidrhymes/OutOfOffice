@@ -1,0 +1,66 @@
+﻿@model List<OutOfOffice.Models.LeaveReq>
+
+<h1>Leave Requests</h1>
+<form asp-action="Search" method="post">
+	<input type="text" class="form-control" name="searchQuery" placeholder="Request ID" />
+	<button type="submit" class="btn btn-success">Search</button>
+</form>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				EmployeeID
+			</th>
+			<th>
+				Absence Reason
+			</th>
+			<th>
+				Start Date
+			</th>
+			<th>
+				Status
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var request in Model)
+			{
+				<tr>
+					<td>
+						@request.ID
+					</td>
+					@if (request.Employee != null)
+					{
+						<td>
+							@request.Employee.FullName / #@request.EmployeeID
+						</td>
+					}
+					else
+					{
+						<td>
+							@request.EmployeeID
+						</td>
+					}
+					<td>
+						@request.AbsenceReason
+					</td>
+					<td>
+						@request.StartDate
+					</td>
+					<td>
+						@request.Status
+					</td>
+					<td>
+						<a href="/leavereq/details/@request.ID">DETAILS</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

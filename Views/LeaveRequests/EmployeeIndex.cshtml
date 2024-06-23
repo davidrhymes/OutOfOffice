@@ -1,0 +1,90 @@
+﻿@model List<OutOfOffice.Models.LeaveReq>
+
+<h1>Your Leave Requests</h1>
+<a class="btn btn-success" href="/leavereq/createform">Create new request</a>
+<form asp-action="Search" method="post">
+	<input type="text" class="form-control" name="searchQuery" placeholder="Request ID" />
+	<button type="submit" class="btn btn-success">Search</button>
+</form>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				EmployeeID
+			</th>
+			<th>
+				Absence Reason
+			</th>
+			<th>
+				Start Date
+			</th>
+			<th>
+				End Date
+			</th>
+			<th>
+				Comment
+			</th>
+			<th>
+				Status
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var request in Model)
+			{
+				<tr>
+					<td>
+						@request.ID
+					</td>
+					@if (request.Employee != null)
+					{
+						<td>
+							@request.Employee.FullName / #@request.EmployeeID
+						</td>
+					}
+					else
+					{
+						<td>
+							@request.EmployeeID
+						</td>
+					}
+					<td>
+						@request.AbsenceReason
+					</td>
+					<td>
+						@request.StartDate
+					</td>
+					<td>
+						@request.EndDate
+					</td>
+					<td>
+						@request.Comment
+					</td>
+					<td>
+						@request.Status
+					</td>
+					@if (!request.Status.Equals("Approved") && !request.Status.Equals("Declined"))
+					{
+						<td>
+							<a href="/leavereq/editform/@request.ID">EDIT</a>
+							<a href="/leavereq/deleteform/@request.ID">DELETE</a>
+							<a href="/leavereq/details/@request.ID">DETAILS</a>
+						</td>
+					}
+					else
+					{
+						<td>
+							<a href="/leavereq/details/@request.ID">DETAILS</a>
+						</td>
+					}
+				</tr>
+			}
+		}
+	</tbody>
+</table>

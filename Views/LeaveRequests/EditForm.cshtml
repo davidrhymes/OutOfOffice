@@ -1,0 +1,46 @@
+﻿@model LeaveReq
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<input asp-for="ID" class="form-control" type="hidden" />
+		<input asp-for="EmployeeID" value="@ViewBag.currentUser.ID" class="form-control" readonly="readonly" />
+	</div>
+
+	<div class="form-group">
+		<label asp-for="AbsenceReason">AbsenceReason:</label>
+		<input asp-for="AbsenceReason" class="form-control" required />
+		<span asp-validation-for="AbsenceReason" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="StartDate">StartDate:</label>
+		<input asp-for="StartDate" class="form-control" required />
+		<span asp-validation-for="StartDate" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="EndDate">EndDate:</label>
+		<input asp-for="EndDate" class="form-control" required />
+		<span asp-validation-for="EndDate" class="text-danger"></span>
+	</div>
+
+@*	<div class="form-group">
+		<label asp-for="Comment">Comment:</label>
+		<input asp-for="Comment" class="form-control" />
+		<span asp-validation-for="Comment" class="text-danger"></span>
+	</div>*@
+
+	<div class="form-group">
+		<label asp-for="Status">Status:</label>
+		<select id="Select" class="form-control">
+			<option value="Submitted">Submit</option>
+			<option value="Disabled">Disable</option>
+		</select>
+		<input type="hidden" asp-for="Status" id="FKid" class="form-control" />
+	</div>
+
+	<button type="submit" class="btn btn-primary">Create</button>
+	<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script src="/js/SelectionChange.js"></script>

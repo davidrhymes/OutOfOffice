@@ -1,0 +1,81 @@
+﻿@model List<OutOfOffice.Models.Project>
+
+<h1>Projects</h1>
+<a class="btn btn-success" href="/project/createform">Add new project</a>
+<form asp-action="Search" method="post">
+	<input type="text" class="form-control" name="searchQuery" placeholder="Project ID" />
+	<button type="submit" class="btn btn-success">Search</button>
+</form>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Project Type
+			</th>
+			<th>
+				Start Date
+			</th>
+			<th>
+				End Date
+			</th>
+			<th>
+				Project Manager
+			</th>
+			<th>
+				Comment
+			</th>
+			<th>
+				Status
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var project in Model)
+			{
+				<tr>
+					<td>
+						@project.ID
+					</td>
+					<td>
+						@project.ProjectType
+					</td>
+					<td>
+						@project.StartDate
+					</td>
+					<td>
+						@project.EndDate
+					</td>
+					@if (project.ProjectManager != null)
+					{
+						<td>
+							@project.ProjectManager.FullName / #@project.ProjectManagerID
+						</td>
+					}
+					else
+					{
+						<td>
+							@project.ProjectManagerID
+						</td>
+					}
+					<td>
+						@project.Comment
+					</td>
+					<td>
+						@project.Status
+					</td>
+					<td>
+						<a href="/project/editform/@project.ID">EDIT</a>
+						<a href="/project/deleteform/@project.ID">DELETE</a>
+						<a href="/project/details/@project.ID">DETAILS</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
